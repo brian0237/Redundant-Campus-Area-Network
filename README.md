@@ -13,9 +13,17 @@ To achieve this, a redundant enterprise campus network was designed using the Ci
  
 
 
-| wd       | Age | Country     |
-|------------|-----|-------------|
-| Alice      | 25  | USA         |
-| Bob        | 30  | Canada      |
-| Charlie    | 28  | Australia   |
+| Networking and switching | Services | Security | Routing | wireless |
+|------------|-----|-------------|----------|---------|
+| Cisco Catalyst 3650 multilayer switches     | DHCP Server  | SSH management access         |   OSPF       |  Wi-Fi DHCP pool        |
+| Cisco Catalyst 2960 access switches        | FTP Server  | Standard ACL for VTY access      | Static Routing           |     PSK    |
+| VLANs  | DNS Server  | Extended ACLs   |        ISP and Internet simulation   |  WPA2 wireless networks       |
+| 802.1Q trunking      | Web server  | Inspection ACLs         |          |  WPA2 Policy with AES encryption        |
+| Inter VLAN routing        | FTP  | IP arp inspection      |           |  Lightweight Access Points       |
+|EtherChannel using LACP    | SMTP  | DHCP Snooping   |           |      SSIDs   |
+| RSTP        | VoIP  | NAT and PAT      |           |         |
+| HSRP  | 28  |    |           |         |
+| BPDU Guard      |  |         |          |          |
+|    VTP    | 30  |     |           |         |
+|  DTP  |   | |           |         |
 
