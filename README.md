@@ -59,5 +59,19 @@ I configured the following:
 - Disbled DTP
 - Trunk and access ports on switch interfaces
 Troubleshooting was done to resolve VLAN mismatches
-# IP addresses, Layer-3 EtherChannel, HSRP
+# 3. IP addresses, Layer-3 EtherChannel, HSRP
+I configured:
+- DHCP on the internal router's interfaces
+- Ip addresses for interfaces on the Core and distribution layer multilayer switches
+- EtherChannel on the core and distribution layer switches
+- The server's Default gateway, IPV4 address, and subnet mask
+- Management IP addresses on the Access layer switches
+- HSRPv2 for redundancy on the Distribution layer switches
+All these configurations provided the network with link redundancy, increased bandwidth, load balancing
+# Rapid Spanning Tree Protocol (RSTP)
+I configured PVST+ on all Access and distribution Layer switches to prevent switching loops and to drastically reduce network convergence time from 50s (max age timer plus foward delay timer)to a few seconds. I did the following
+- Enabled Portfast on all edge ports
+- Enabled BPDU guard on edge ports to protect the spanning tree topology from external BPDU'S that could threaten the intergrit of the topology
+# Static and Dynamic Routing
+
 
