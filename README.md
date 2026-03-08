@@ -12,3 +12,8 @@ To achieve this, a redundant enterprise campus network was designed using the Ci
 
  |Networking and Switching|Services|Security|Routing|Wireless
 
+ Networking and Switching	Routing and WAN	Security	Services	Wireless
+Cisco Packet Tracer	OSPF	Cisco ASA firewalls	DHCP Server	Cisco WLC
+Cisco Catalyst 2960 access switches	Static routes	SSH management access	DNS Server	Lightweight Access Points
+Cisco Catalyst 3650 multilayer switches	Routed links with /30 subnets	Standard ACL for VTY access	FTP Server	WPA2 wireless networks
+
