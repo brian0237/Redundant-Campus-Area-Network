@@ -13,7 +13,7 @@ To achieve this, a redundant enterprise campus network was designed using the Ci
  
 
 
-| Name       | Age | Country     |
+| wd       | Age | Country     |
 |------------|-----|-------------|
 | Alice      | 25  | USA         |
 | Bob        | 30  | Canada      |
