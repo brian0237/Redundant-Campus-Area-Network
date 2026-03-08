@@ -73,5 +73,103 @@ I configured PVST+ on all Access and distribution Layer switches to prevent swit
 - Enabled Portfast on all edge ports
 - Enabled BPDU guard on edge ports to protect the spanning tree topology from external BPDU'S that could threaten the intergrit of the topology
 # Static and Dynamic Routing
+Configure OSPF on the internal router (LAN-facing interfaces) and all Core and Distribution switches (all Layer-3 interfaces)
+I configured:
+- all the devices in area 0
+- Each device's RID to match the loopback interface
+- OSPF on all loopback interfaces
+- all physical connections between OSPF neighbors to use a network type that doesn’t elect a DR/BDR (Point to point)
+- one static default route for each of the internal router's Internet connections. Made them recursive routes.
+- the internal router to function as an OSPF ASBR and advertise itss default route to other routes in the OSPF domain.
+# Network Services
+I configured the following network services;
+DHCP, DNS, NTP, SNMP, Syslog, FTP, SSH, NAT
+For the DHCP pools, I created the management pool, PC pool, Phone pool, and a Wi-Fi pool. 
+I configured:
+- the Distribution switches to relay wired DHCP clients’ broadcast messages to the internal router’s Loopback0 IP address
+- all routers and switches to use domain name jeremysitlab.com and used SRV1 as their DNS server.
+- All Core, Distribution, and Access switches to use the internal router’s loopback interface as their NTP server
+-  the SNMP community string SNMPSTRING on all routers and switches.
+-  SSH for secure remote access on all routers and switches.
+-  static NAT on R1 to enable hosts on the Internet to access SRV1
+-  Disable CDP on all devices and enable LLDP instead.
+# Security: ACLs and Layer-2 Security Features
+I configured ACLs layer-2 security features like Port Security, DHCP snooping, and Dynamic ARP inspection to keep the network secure, enforce privacy and restrict access.
+# IPv6
+- To prepare for a migration to IPv6, I enabled IPv6 routing and configured IPv6 addresses on the internal router, CSW1, and CSW2
+- I Configured two default static routes on the internal Router
+# Wireless
+I configured the following:
+- A username and Password to restrict access to the GUI of the WLC1
+- A dynamic interface for the Wi-Fi WLAN
+- And enabled the following WLAN; Profile name, SSID, ID, Status, Security: WPA2 Policy with AES encryption, PSK
+# Troubleshooting I did in the course of this project
+1. OSPF Neighbor Adjacency Issue
+I encountered a problem where OSPF neighbors were not forming between the core and distribution routers, which I resolved by correcting the OSPF network statements and ensuring both interfaces were in the same area.
+2. HSRP Gateway Redundancy Failure
+I noticed that hosts were unable to use the standby gateway during failover, which I fixed by adjusting the HSRP priority and verifying the correct virtual IP configuration.
+3. VLAN Communication Problem
+I faced an issue where devices in the same VLAN could not communicate across switches, which I resolved by allowing the VLANs on the trunk links between switches.
+4. EtherChannel Not Forming
+I observed that the links between switches were not bundling into an EtherChannel, and I fixed the issue by ensuring both sides had matching channel group configurations and interface settings.
+5. Spanning Tree Root Bridge Misconfiguration
+I discovered that traffic was taking inefficient paths due to an incorrect root bridge selection, which I corrected by manually setting the intended distribution switch as the STP root.
+6. DHCP Address Assignment Failure
+I encountered a situation where client devices were not receiving IP addresses, which I fixed by correcting the DHCP pool configuration and verifying the default gateway settings.
+7. SSH Remote Management Access Issue
+I initially could not access some network devices remotely via SSH, which I resolved by configuring the correct VTY line settings, enabling SSH, and verifying user authentication.
+# Verification Commands
+## 1. PCs
+- ipconfig /all
+- ping
+## 2. Switches
+- show cdp neighbors
+- show spanning-tree
+- show etherchannel summary
+- show vlan brief
+- show interface trunk
+- show interface status
+## 3. Routers
+- show ip interface brief
+- show ip route
+- show ip ospf neighbor
+# Skills acquired Applied in this lab
+- Enterprise Network Design: Designed a scalable campus network using the Cisco three-tier architecture (Core, Distribution, Access).
+- VLAN Segmentation:  Configured VLANs to logically separate departments and improve network organization.
+- Inter-VLAN Routing: Implemented Layer 3 routing to allow communication between different VLANs.
+- Dynamic Routing (OSPF): Configured OSPF to enable automatic route exchange between network devices.
+- First Hop Redundancy (HSRP): Implemented gateway redundancy to ensure continuous network availability.
+- Link Aggregation (EtherChannel): Configured EtherChannel to increase bandwidth and provide link redundancy.
+- Spanning Tree Optimization (Rapid PVST+): Optimized Layer 2 redundancy while preventing switching loops.
+- Network Services Deployment Configured DHCP, DNS, NTP, SNMP, Syslog, FTP, and NAT services.
+- Wireless Network Integration: Implemented wireless connectivity using a WLC and access points.
+- Network Security: Applied ACLs and secure device management using SSH.
+- Network Monitoring and Troubleshooting: Diagnosed and resolved connectivity issues using Cisco verification commands.
+# Future Improvements
+## 1. Network Automation
+The network could be enhanced by implementing automation using tools such as Python or Ansible to automate configuration deployment and reduce manual configuration errors.
+## 2. Centralized Network Monitoring
+A centralized monitoring platform such as PRTG, Grafana, or SolarWinds could be integrated to provide real-time visibility into network performance and device health.
+## 3. IPv6 Implementation
+The network could be expanded to support IPv6 addressing and dual-stack routing to prepare the infrastructure for modern networking requirements.
+## 4. Network Segmentation with VRFs
+Virtual Routing and Forwarding (VRF) could be implemented to further isolate network segments and improve scalability in larger enterprise environments.
+
+# Recreating this project
+Requirements
+
+- Cisco Packet Tracer
+- The .pkt project file
+Steps
+
+1. Open the Packet Tracer .pkt file.
+2. Wait for devices to fully boot.
+3. Check green link status and device convergence.
+4. Use verification commands on switches, routers.
+5. Test connectivity with pings and browser access.
+
+
+
+
 
 
