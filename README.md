@@ -37,4 +37,26 @@ Cisco Packet Tracer
 - 3 PCs connected to the IP Phones
 - 2 Laptops connected wirelessly to the LWAPs
 - 1 Server for FTP and web
-  
+# Configurations made
+## 1. Initial Setup
+I configured appropriate hostnames for the routers and switches and also configures passwords and secrets to restrict access to the deices.
+- Hostnames
+- Passwords
+- Synchronous Logging
+## 2. VLANs and Layer 2 Eherchannel and trunking
+I created VLANs to segment the network into logical broadcast domains to improve on security and traffic int the network.
+VLANs used in the network:
+
+a. VLAN 10: PCs
+b. VLAN 20: Phones
+c. VLAN 30: Servers
+d. VLAN 40: Wi-Fi
+e. VLAN 99: Management
+I configured:
+- Etherchannel PortChannel1 between the distribution switches in the various offices
+- Set each trunk’s native VLAN to VLAN 1000 (unused)
+- Disbled DTP
+- Trunk and access ports on switch interfaces
+Troubleshooting was done to resolve VLAN mismatches
+# IP addresses, Layer-3 EtherChannel, HSRP
+
