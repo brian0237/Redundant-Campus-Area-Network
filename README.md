@@ -9,10 +9,6 @@ A company operates two offices, Office A and Office B, that require a reliable a
 
 To achieve this, a redundant enterprise campus network was designed using the Cisco three-tier architecture (Core, Distribution, and Access layers). The network implements VLAN segmentation, inter-VLAN routing, dynamic routing, and redundancy mechanisms to maintain connectivity during link or device failures. Essential services such as DHCP, DNS, NAT, and network monitoring are also integrated to simulate a real-world enterprise environment.
 # Technologies used
-
- 
-
-
 | Networking and switching | Services | Security | Routing | wireless |
 |------------|-----|-------------|----------|---------|
 | Cisco Catalyst 3650 multilayer switches     | DHCP Server  | SSH management access         |   OSPF       |  Wi-Fi DHCP pool        |
@@ -22,8 +18,23 @@ To achieve this, a redundant enterprise campus network was designed using the Ci
 | Inter VLAN routing        | FTP  | IP arp inspection      |           |  Lightweight Access Points       |
 |EtherChannel using LACP    | SMTP  | DHCP Snooping   |           |      SSIDs   |
 | RSTP        | VoIP  | NAT and PAT      |           |         |
-| HSRP  | 28  |    |           |         |
+| HSRP  |   |    |           |         |
 | BPDU Guard      |  |         |          |          |
-|    VTP    | 30  |     |           |         |
+|    VTP    |   |     |           |         |
 |  DTP  |   | |           |         |
-
+# Environment Setup 
+## Software
+Cisco Packet Tracer
+## Devices Used
+- 2 ISP Routers
+- 1 Internal Router for routing and server for DNS and DHCP
+- 2 Branch multilayer switches
+- 4 Office multilayer switches
+- 6 Office access switches
+- 3 IP Phones
+- 2 Lightweight Access points (LWAP)
+- 1 Wireless LAN Controller (WLC)
+- 3 PCs connected to the IP Phones
+- 2 Laptops connected wirelessly to the LWAPs
+- 1 Server for FTP and web
+  
