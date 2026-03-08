@@ -52,7 +52,8 @@ VLANs used in the network:
 3. VLAN 30: Servers
 4. VLAN 40: Wi-Fi
 5. VLAN 99: Management
-I configured:
+   
+I configured the following:
 - Etherchannel PortChannel1 between the distribution switches in the various offices
 - Set each trunk’s native VLAN to VLAN 1000 (unused)
 - Disbled DTP
