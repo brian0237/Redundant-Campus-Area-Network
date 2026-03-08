@@ -47,11 +47,11 @@ I configured appropriate hostnames for the routers and switches and also configu
 I created VLANs to segment the network into logical broadcast domains to improve on security and traffic int the network.
 VLANs used in the network:
 
-a. VLAN 10: PCs
-b. VLAN 20: Phones
-c. VLAN 30: Servers
-d. VLAN 40: Wi-Fi
-e. VLAN 99: Management
+1. VLAN 10: PCs
+2. VLAN 20: Phones
+3. VLAN 30: Servers
+4. VLAN 40: Wi-Fi
+5. VLAN 99: Management
 I configured:
 - Etherchannel PortChannel1 between the distribution switches in the various offices
 - Set each trunk’s native VLAN to VLAN 1000 (unused)
