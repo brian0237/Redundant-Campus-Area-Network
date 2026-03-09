@@ -1,0 +1,152 @@
+DSW-A1, DSW-A2
+
+en
+conf t
+ int range g1/0/4-5
+  channel-group 1 mode desi
+  int po1
+  sw mode trunk
+  sw nonegotiate
+  sw trunk native vlan 1000
+  sw trunk allowed vlan 10,20,40,99
+  int range g1/0/1-3
+  sw mode trunk
+  sw nonegotiate
+  sw trunk native vlan 1000
+  sw trunk allowed vlan 10,20,40,99
+  exit
+ vlan 10
+  name PCs
+ vlan 20
+  name Phones
+ vlan 40
+  name Wi-Fi
+ vlan 99
+  name Management
+  exit
+ VTP version 2
+ VTP domain JeremysITLab
+ int range g1/0/6-24, g1/1/3-4
+ shutdown
+ write
+ 
+
+ASW-A1, ASW-A2, ASW-A3
+en
+conf t
+ int range g0/1-2
+  sw mode trunk
+  sw nonegotiate
+  sw trunk native vlan 1000
+  sw trunk allowed vlan 10,20,40,99
+  vtp mode client
+  exit
+
+ASW-A1
+en
+conf t
+ int f0/1
+ sw mode access
+ sw nonegotiate
+ int f0/2
+ sw mode trunk
+ sw trunk allowed vlan 40,99
+ sw trunk native vlan 99
+ sw non
+ int range f0/3-24
+ shutdown
+ do write
+ 
+ASW-A2, ASW-A3
+en
+conf t
+ int f0/1
+ sw mode access
+ sw access vlan 10
+ sw voice vlan 20
+ sw nonegotiate
+ int range f0/2-24
+ shutdown
+ do write
+
+DSW-B1, DSW-B2
+
+en
+conf t
+ int range g1/0/4-5
+  channel-group 1 mode active
+  int po1
+  sw mode trunk
+  sw nonegotiate
+  sw trunk native vlan 1000
+  sw trunk allowed vlan 10,20,30,99
+  int range g1/0/1-3
+  sw mode trunk
+  sw nonegotiate
+  sw trunk native vlan 1000
+  sw trunk allowed vlan 10,20,30,99
+  exit
+ vlan 10
+  name PCs
+ vlan 20
+  name Phones
+ vlan 30
+  name Servers
+ vlan 99
+  name Management
+  exit
+ VTP version 2
+ VTP domain JeremysITLab
+ int range g1/0/6-24, g1/1/3-4
+ shutdown
+ write
+
+ASW-B1, ASW-B2, ASW-B3
+en
+conf t
+ int range g0/1-2
+  sw mode trunk
+  sw nonegotiate
+  sw trunk native vlan 1000
+  sw trunk allowed vlan 10,20,30,99
+  vtp mode client
+  exit
+
+ASW-B1
+en
+conf t
+ int f0/1
+ sw mode access
+ sw access vlan 99
+ sw nonegotiate
+ int range f0/2-24
+ shutdown
+ do write
+
+ASW-B2
+en
+conf t
+ int f0/1
+ sw mode access
+ sw access vlan 10
+ sw voice vlan 20
+ sw nonegotiate
+ int range f0/2-24
+ shutdown
+ do write
+
+ASW-B3
+en
+conf t
+ int f0/1
+ sw mode access
+ sw access vlan 30
+ sw nonegotiate
+ int range f0/2-24
+ shutdown
+ do write
+ 
+ 
+  
+
+ 
