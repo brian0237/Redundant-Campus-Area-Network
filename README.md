@@ -1,7 +1,7 @@
 # Redundant-Campus-Area-Network
 This project demonstrates a redundant enterprise network based on the Cisco three-tier architecture (Core, Distribution, Access) The lab includes VLAN segmentation, inter-VLAN routing, OSPF, HSRP, EtherChannel, Rapid PVST+, ACLs, DHCP, DNS, NTP, SNMP, Syslog, FTP, SSH, NAT, and wireless connectivity.
 # Network Topology
-![Topology for the Campus Network](https://github.com/brian0237/Redundant-Campus-Area-Network/blob/c72173d19beac490374d0f92e5bc08a870c48135/Topology.png)
+![Topology for the Campus Network](https://github.com/brian0237/Redundant-Campus-Area-Network/blob/c72173d19beac490374d0f92e5bc08a870c48135/CampusNetworktopology.png)
 # Project Summary
 This project simulates a highly available enterprise campus network connecting two office locations. The topology follows the Cisco three-tier architecture with redundant core switches, distribution switches, and access switches to ensure reliability and scalability. The network implements VLAN segmentation, inter-VLAN routing, and OSPF for dynamic routing between layers. High availability is achieved through HSRP, EtherChannel, and Rapid PVST+ to provide link and gateway redundancy. The design also integrates essential enterprise services such as DHCP, DNS, NTP, SNMP, Syslog, NAT, and secure management using SSH. Wireless connectivity is provided through a WLC and lightweight access points to support mobile devices across the network.
 # Project Scenario
