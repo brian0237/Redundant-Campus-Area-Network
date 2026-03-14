@@ -1,0 +1,70 @@
+DSW-A1-A2
+en
+conf t
+ip Access-list extended  OfficeA_to_OfficeB
+permit icmp 10.1.0.0 0.0.0.255 10.3.0.0 0.0.0.255
+deny ip 10.1.0.0 0.0.0.255 10.3.0.0 0.0.0.255
+permit ip any any
+int vlan 10 
+ip access-group OfficeA_to_OfficeB in
+
+ASW-A1-B1-B3
+en
+conf t
+int f0/1
+sw port violation restrict
+sw port mac sticky
+do write
+
+ASW-A2-A3-B2
+en
+conf t
+int f0/1
+sw port max 2
+sw port violation restrict
+sw port mac sticky
+do write
+
+ASW-A1
+ip dhcp snooping
+ip dhcp snooping vlan 10,20,40,99
+no ip dhcp snooping information option
+int range g0/1-2
+ip dhcp snooping trust
+int f0/1
+ip dhcp snooping limit rate 15
+int f0/2
+ip dhcp snooping limit rate 100
+ip arp inspection vlan 10,20,40,99
+ip arp inspection validate dst-mac src-mac ip
+int range g0/1-2
+ip arp inspection trust
+
+
+ASW-A2-A3
+ip dhcp snooping
+ip dhcp snooping vlan 10,20,40,99
+no ip dhcp snooping information option
+int range g0/1-2
+ip dhcp snooping trust
+int f0/1
+ip dhcp snooping limit rate 15
+do write
+ip arp inspection vlan 10,20,40,99
+ip arp inspection validate dst-mac src-mac ip
+int range g0/1-2
+ip arp inspection trust
+
+ASW-B1-B2-B3
+ip dhcp snooping
+ip dhcp snooping vlan 10,20,30,99
+no ip dhcp snooping information option
+int range g0/1-2
+ip dhcp snooping trust
+int f0/1
+ip dhcp snooping limit rate 15
+do write
+ip arp inspection vlan 10,20,30,99
+ip arp inspection validate dst-mac src-mac ip
+int range g0/1-2
+ip arp inspection trust

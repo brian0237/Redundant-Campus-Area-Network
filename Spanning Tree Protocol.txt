@@ -1,0 +1,57 @@
+DSW-A1
+en
+conf t
+ span mode rapid-pvst
+ span vlan 99 prio 0
+ span vlan 10 prio 0
+ span vlan 20 prio 4096 
+ span vlan 40 prio 4096
+ do write
+
+DSW-A2
+en
+conf t
+ span mode rapid-pvst
+ span vlan 20 prio 0
+ span vlan 40 prio 0
+ span vlan 99 prio 4096 
+ span vlan 10 prio 4096
+ do write
+
+DSW-B1
+en
+conf t
+ span mode rapid-pvst
+ span vlan 99 prio 0
+ span vlan 10 prio 0
+ span vlan 20 prio 4096 
+ span vlan 30 prio 4096
+ do write
+
+DSW-B2
+en
+conf t
+ span mode rapid-pvst
+ span vlan 20 prio 0
+ span vlan 30 prio 0
+ span vlan 99 prio 4096 
+ span vlan 10 prio 4096
+ do write
+
+ASW-A1
+en
+conf t
+ span mode rapid-pvst
+ int range f0/1-2
+  span bpduguard en
+  span portfast
+  do write
+
+ASW-A2, ASW-A3, ASW-B1, ASW-B2, ASW-B3
+en
+conf t
+ span mode rapid-pvst
+ int f0/1
+  span bpduguard en
+  span portfast
+  do write

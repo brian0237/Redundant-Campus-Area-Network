@@ -1,0 +1,30 @@
+Internal Router R1
+en
+conf t
+ipv6 unicast-routing
+int g0/0/0 
+ipv6 address 2001:db8:a::2/64
+int G0/1/0 
+ipv6 address 2001:db8:b::2/64
+int g0/0
+ipv6 address 2001:db8:a1::/64 eui
+int g0/1
+ipv6 address 2001:db8:a2::/64 eui
+ipv6 route ::/0 2001:db8:a::1
+ipv6 route ::/0 g0/1/0 2001:db8:b::1 2 
+
+
+CSW1
+ipv6 unicast-routing
+int g1/0/1
+ipv6 address 2001:db8:a1::/64 eui
+int po1
+ipv6 enable
+
+CSW2
+ipv6 unicast-routing
+int g1/0/1
+ipv6 address 2001:db8:a2::/64 eui
+int po1
+ipv6 enable
+

@@ -1,0 +1,288 @@
+Internal Router R1
+en
+conf t
+ip dhcp excluded 10.0.0.1 10.0.0.10
+ip dhcp excluded 10.1.0.1 10.1.0.10
+ip dhcp excluded 10.2.0.1 10.2.0.10
+ip dhcp excluded 10.0.0.17 10.0.0.26
+ip dhcp excluded 10.3.0.1 10.3.0.10
+ip dhcp excluded 10.4.0.1 10.4.0.10
+ip dhcp excluded 10.6.0.1 10.6.0.10
+ip dhcp pool A-Mgmt
+network 10.0.0.0 255.255.255.240
+default-router 10.0.0.1
+domain-name jeremsitlab.com
+dns-server 10.5.0.4
+option 43 ip 10.0.0.7
+exit
+ip dhcp pool A-PC
+network 10.1.0.0 255.255.255.240
+default-router 10.1.0.1
+domain-name jeremsitlab.com
+dns-server 10.5.0.4
+exit
+ip dhcp pool A-Phone
+network 10.2.0.0 255.255.255.240
+default-router 10.2.0.1
+domain-name jeremsitlab.com
+dns-server 10.5.0.4
+exit
+ip dhcp pool B-Mgmt
+network 10.0.0.16 255.255.255.240
+default-router 10.0.0.17
+domain-name jeremsitlab.com
+dns-server 10.5.0.4
+option 43 ip 10.0.0.7
+exit
+ip dhcp pool B-PC
+network 10.3.0.0 255.255.255.240
+default-router 10.3.0.1
+domain-name jeremsitlab.com
+dns-server 10.5.0.4
+exit
+ip dhcp pool B-Phone
+network 10.4.0.0 255.255.255.240
+default-router 10.4.0.1
+domain-name jeremsitlab.com
+dns-server 10.5.0.4
+exit
+ip domain name jeremysitlab.com
+ip name-server 10.5.0.4
+ntp master 5
+ntp server 216.239.35.0
+ntp authentication-key 1 md5 ccna
+ntp trusted-key 1
+snmp-server community SNMPSTRING ro
+logging 10.5.0.4
+logging trap debugging
+logging buffered 8192
+ip ftp username cisco
+ip ftp password cisco
+do copy flash
+10.5.0.4
+c2900-universalk9-mz.SPA.155-3.M4a.bin
+do write
+do reload
+do delete flash:c2900-universalk9-mz.SPA.151-4.M4.bin
+crypto key generate rsa gen modulus 4096
+ip ssh version 2
+access-list 1 permit 10.1.0.0 0.0.0.255
+line vty 0 14
+access-class 1 in
+transport input ssh
+login local
+logging synch
+ip nat inside source static 10.5.0.4 203.0.113.113
+int range g0/0/0, g0/1/0
+ip nat outside
+int range g0/0-1
+ip nat inside
+access-list 2 permit 10.1.0.0 0.0.0.255
+access-list 2 permit 10.2.0.0 0.0.0.255
+access-list 2 permit 10.3.0.0 0.0.0.255
+access-list 2 permit 10.4.0.0 0.0.0.255
+access-list 2 permit 10.6.0.0 0.0.0.255
+ip nat pool POOL1 203.0.113.200 203.0.113.207 netmask 255.255.255.248
+ip nat inside source list 1 pool POOL1 overload 
+no cdp run
+lldp run
+
+CSW1, CSW2
+ip domain name jeremysitlab.com
+ip name-server 10.5.0.4
+ntp authentication-key 1 md5 ccna
+ntp trusted-key 1
+ntp server 10.0.0.76 key 1
+no cdp run
+lldp run
+snmp-server community SNMPSTRING ro
+logging 10.5.0.4
+logging trap debugging
+logging buffered 8192
+crypto key generate rsa gen modulus 2048
+ip ssh version 2
+access-list 1 permit 10.1.0.0 0.0.0.255
+line vty 0 14
+access-class 1 in
+transport input ssh
+login local
+logging synch
+
+
+
+DSW-A1
+en
+conf t
+ip domain name jeremysitlab.com
+ip name-server 10.5.0.4
+int vlan 99
+ip helper-address 10.0.0.76
+int vlan 10
+ip helper-address 10.0.0.76
+int vlan 20
+ip helper-address 10.0.0.76
+int vlan 40
+ip helper-address 10.0.0.76
+exit
+ntp authentication-key 1 md5 ccna
+ntp trusted-key 1
+ntp server 10.0.0.76 key 1
+snmp-server community SNMPSTRING ro
+logging 10.5.0.4
+logging trap debugging
+logging buffered 8192
+crypto key generate rsa gen modulus 4098
+ip ssh version 2
+access-list 1 permit 10.1.0.0 0.0.0.255
+line vty 0 14
+access-class 1 in
+transport input ssh
+login local
+logging synch
+no cdp run
+lldp run
+do write
+
+
+DSW-A2
+en
+conf t
+ip domain name jeremysitlab.com
+ip name-server 10.5.0.4
+int vlan 99
+ip helper-address 10.0.0.76
+int vlan 10
+ip helper-address 10.0.0.76
+int vlan 20
+ip helper-address 10.0.0.76
+int vlan 40
+ip helper-address 10.0.0.76
+exit
+ntp authentication-key 1 md5 ccna
+ntp trusted-key 1
+ntp server 10.0.0.76 key 1
+snmp-server community SNMPSTRING ro
+logging 10.5.0.4
+logging trap debugging
+logging buffered 8192
+crypto key generate rsa gen modulus 4098
+ip ssh version 2
+access-list 1 permit 10.1.0.0 0.0.0.255
+line vty 0 14
+access-class 1 in
+transport input ssh
+login local
+logging synch
+no cdp run
+lldp run
+
+
+DSW-B1
+en
+conf t
+ip domain name jeremysitlab.com
+ip name-server 10.5.0.4
+int vlan 99
+ip helper-address 10.0.0.76
+int vlan 10
+ip helper-address 10.0.0.76
+int vlan 20
+ip helper-address 10.0.0.76
+int vlan 30
+ip helper-address 10.0.0.76
+exit
+ntp authentication-key 1 md5 ccna
+ntp trusted-key 1
+ntp server 10.0.0.76 key 1
+snmp-server community SNMPSTRING ro
+logging 10.5.0.4
+logging trap debugging
+logging buffered 8192
+crypto key generate rsa gen modulus 4098
+ip ssh version 2
+access-list 1 permit 10.1.0.0 0.0.0.255
+line vty 0 14
+access-class 1 in
+transport input ssh
+login local
+logging synch
+no cdp run
+lldp run
+
+
+DSW-B2
+en
+conf t
+ip domain name jeremysitlab.com
+ip name-server 10.5.0.4
+int vlan 99
+ip helper-address 10.0.0.76
+int vlan 10
+ip helper-address 10.0.0.76
+int vlan 20
+ip helper-address 10.0.0.76
+int vlan 30
+ip helper-address 10.0.0.76
+exit
+ntp authentication-key 1 md5 ccna
+ntp trusted-key 1
+ntp server 10.0.0.76 key 1
+snmp-server community SNMPSTRING ro
+logging 10.5.0.4
+logging trap debugging
+logging buffered 8192
+crypto key generate rsa gen modulus 4098
+ip ssh version 2
+access-list 1 permit 10.1.0.0 0.0.0.255
+line vty 0 14
+access-class 1 in
+transport input ssh
+login local
+logging synch
+no cdp run
+lldp run
+
+
+
+Server 1 (GUI)
+a. google.com = 172.253.62.100
+b. youtube.com = 152.250.31.93
+c. jeremysitlab.com = 66.235.200.145
+d. www.jeremysitlab.com = jeremysitlab.com
+
+ASW-A1, ASW-A2, ASW-A3, ASW-B1, ASW-B2, ASW-B3
+en
+conf t
+ip domain name jeremysitlab.com
+ip name-server 10.5.0.4
+ntp authentication-key 1 md5 ccna
+ntp trusted-key 1
+ntp server 10.0.0.76 key 1
+do write
+snmp-server community SNMPSTRING ro
+logging 10.5.0.4
+logging trap debugging
+logging buffered 8192
+crypto key generate rsa gen modulus 4098
+ip ssh version 2
+access-list 1 permit 10.1.0.0 0.0.0.255
+line vty 0 14
+access-class 1 in
+transport input ssh
+login local
+logging synch
+no cdp run
+lldp run
+int f0/1
+no lldp trans
+do write
+
+
+
+
+
+
+
+
+
+
